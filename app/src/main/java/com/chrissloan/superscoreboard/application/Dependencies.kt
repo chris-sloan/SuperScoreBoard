@@ -1,6 +1,6 @@
 package com.chrissloan.superscoreboard.application
 
-import android.system.Os.bind
+import com.chrissloan.superscoreboard.application.Constants.POLLING_INTERVAL
 import com.chrissloan.superscoreboard.data.fixtures.FixtureListRepositoryImpl
 import com.chrissloan.superscoreboard.data.fixtures.FixturesApi
 import com.chrissloan.superscoreboard.data.match.MatchDetailApi
@@ -11,7 +11,6 @@ import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesViewModel
 import com.chrissloan.superscoreboard.match.MatchDetailRepository
 import com.chrissloan.superscoreboard.match.viewmodel.MatchDetailReducer
 import com.chrissloan.superscoreboard.match.viewmodel.MatchDetailViewModel
-import com.chrissloan.superscoreboard.model.Match
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -26,7 +25,10 @@ object Dependencies {
 
     val domainDependencies = module {
         singleOf(::FixtureListRepositoryImpl) { bind<FixtureListRepository>() }
-        single<MatchDetailRepository> { MatchDetailRepositoryImpl(get(), 30000L) }
+        single<MatchDetailRepository> { MatchDetailRepositoryImpl(
+            matchDetailApi = get(),
+            matchDetailPollingInterval = POLLING_INTERVAL
+        ) }
     }
 
     val uiDependencies = module {
@@ -36,4 +38,8 @@ object Dependencies {
         factoryOf(::MatchDetailReducer)
         viewModelOf(::MatchDetailViewModel)
     }
+}
+
+object Constants {
+    internal const val POLLING_INTERVAL = 30_000L
 }

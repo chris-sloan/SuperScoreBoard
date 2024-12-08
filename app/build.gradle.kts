@@ -1,3 +1,7 @@
+import com.android.tools.r8.internal.md
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.gradle.internal.impldep.org.jsoup.nodes.Document.OutputSettings.Syntax.html
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 import org.gradle.kotlin.dsl.implementation
 
 plugins {
@@ -6,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.serialization") version "2.0.0"
     id("com.autonomousapps.dependency-analysis")
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 android {
@@ -41,6 +46,32 @@ android {
     buildFeatures {
         compose = true
     }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = true
+    autoCorrect = true
+    baseline = file("$rootDir/baseline.xml")
+    reports {
+        txt.enabled = true
+        html.enabled = true
+        md.enabled = true
+    }
+}
+
+val detektProjectBaseline by tasks.registering(DetektCreateBaselineTask::class) {
+    description = "Overrides current baseline."
+    buildUponDefaultConfig.set(true)
+    ignoreFailures.set(true)
+    parallel.set(true)
+    setSource(files(rootDir))
+    config.setFrom(files("$rootDir/detekt.yml"))
+    baseline.set(file("$rootDir/baseline.xml"))
+    include("**/*.kt")
+    include("**/*.kts")
+    exclude("**/resources/**")
+    exclude("**/build/**")
 }
 
 dependencies {

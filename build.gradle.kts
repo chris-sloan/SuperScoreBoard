@@ -7,4 +7,5 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.android.library) apply false
     id("com.autonomousapps.dependency-analysis") version "2.6.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
