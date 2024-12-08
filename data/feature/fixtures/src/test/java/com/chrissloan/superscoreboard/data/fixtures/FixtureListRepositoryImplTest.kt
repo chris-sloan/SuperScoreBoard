@@ -5,6 +5,7 @@ import com.chrissloan.superscoreboard.model.Fixtures
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -29,7 +30,7 @@ class FixtureListRepositoryImplTest {
             val expectedFixtures = Fixtures()
             coEvery { fixturesApi.getFixtures() } returns expectedFixtures
 
-            val actualFixtures = fixtureListRepository.getFixtures()
+            val actualFixtures = fixtureListRepository.getFixtures().first()
 
             assertEquals(expectedFixtures, actualFixtures)
         }

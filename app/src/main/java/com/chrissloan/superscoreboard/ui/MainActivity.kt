@@ -52,7 +52,7 @@ fun SuperScoreBoard() {
             listPane = {
                 AnimatedPane {
                     FixturesScreen(onItemClick = { item ->
-                        navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, item.id)
+                        navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, item)
                     })
                 }
             },

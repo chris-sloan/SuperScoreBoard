@@ -25,23 +25,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.chrissloan.superscoreboard.common.TeamBadge
-import com.chrissloan.superscoreboard.model.Fixtures
-import com.chrissloan.superscoreboard.model.FixturesItem
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.FixtureState
+import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.FixtureState.MatchStatus
 
 @Composable
 fun FixtureList(
-    fixtures: Fixtures,
-    onItemClick: (FixturesItem) -> Unit,
+    fixtures: List<FixtureState>,
+    onItemClick: (Int) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.secondary)
     ) {
-        fixtures.fixtures.forEach { item ->
+        fixtures.forEach { item ->
             item {
                 Fixture(
                     item = item,
@@ -55,8 +52,8 @@ fun FixtureList(
 
 @Composable
 fun Fixture(
-    item: FixturesItem,
-    onItemClick: (FixturesItem) -> Unit,
+    item: FixtureState,
+    onItemClick: (Int) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -65,13 +62,15 @@ fun Fixture(
             modifier = Modifier
                 .padding(4.dp)
                 .clickable {
-                    if (item.status != "U") {
-                        onItemClick(item)
-                    }
+                    onItemClick(item.id)
+
                 },
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            border = if (item.status == "I") BorderStroke(1.dp, Color(0xFF51E79A)) else null,
+            border = if (item.status is MatchStatus.InProgress) BorderStroke(
+                1.dp,
+                Color(0xFF51E79A)
+            ) else null,
         ) {
             Row(
                 modifier = Modifier
@@ -80,24 +79,26 @@ fun Fixture(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                HomeTeam(item.teams[0].team.shortName)
+                HomeTeam(item.homeTeam.name)
                 Row(
                     modifier = Modifier.weight(1f),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     TeamBadge(
-                        id = item.teams[0].team.id,
+                        id = item.homeTeam.id,
                         modifier = Modifier
                             .size(32.dp)
                             .weight(1f)
                     )
                     ScoreBox(item)
-                    TeamBadge(id = item.teams[1].team.id,
+                    TeamBadge(
+                        id = item.awayTeam.id,
                         modifier = Modifier
                             .size(32.dp)
-                            .weight(1f))
+                            .weight(1f)
+                    )
                 }
-                AwayTeam(item.teams[1].team.shortName)
+                AwayTeam(item.awayTeam.name)
             }
         }
     }
@@ -126,21 +127,19 @@ fun RowScope.AwayTeam(teamName: String) {
 }
 
 @Composable
-private fun ScoreBox(item: FixturesItem) {
+private fun ScoreBox(item: FixtureState) {
     when (item.status) {
-        "U" -> UpcomingScoreBox(item)
-
-        "C" -> CompletedScoreBox(item)
-
-        "I" -> InProgressScoreBox(item)
+        is MatchStatus.Upcoming -> UpcomingScoreBox(item.status)
+        is MatchStatus.Completed -> CompletedScoreBox(item.status)
+        is MatchStatus.InProgress -> InProgressScoreBox(item.status)
     }
 }
 
 @Composable
-fun UpcomingScoreBox(item: FixturesItem) {
+fun UpcomingScoreBox(item: MatchStatus.Upcoming) {
     Text(
         modifier = Modifier.padding(horizontal = 8.dp),
-        text = formatFutureMatch(item),
+        text = item.time,
         maxLines = 1,
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.titleSmall
@@ -148,7 +147,7 @@ fun UpcomingScoreBox(item: FixturesItem) {
 }
 
 @Composable
-fun CompletedScoreBox(item: FixturesItem) {
+fun CompletedScoreBox(item: MatchStatus.Completed) {
     Text(
         modifier = Modifier
             .clip(
@@ -156,7 +155,7 @@ fun CompletedScoreBox(item: FixturesItem) {
             )
             .background(MaterialTheme.colorScheme.errorContainer)
             .padding(horizontal = 6.dp, vertical = 2.dp),
-        text = formatHistoricMatch(item),
+        text = item.score,
         maxLines = 1,
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.titleMedium
@@ -164,14 +163,14 @@ fun CompletedScoreBox(item: FixturesItem) {
 }
 
 @Composable
-fun InProgressScoreBox(item: FixturesItem) {
+fun InProgressScoreBox(item: MatchStatus.InProgress) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             modifier = Modifier
                 .clip(RoundedCornerShape(4.dp))
                 .background(Color(0xFF51E79A))
                 .padding(horizontal = 6.dp, vertical = 2.dp),
-            text = formatHistoricMatch(item),
+            text = item.score,
             color = MaterialTheme.colorScheme.secondary,
             maxLines = 1,
             textAlign = TextAlign.Center,
@@ -182,23 +181,10 @@ fun InProgressScoreBox(item: FixturesItem) {
                 horizontal = 6.dp,
                 vertical = 2.dp
             ),
-            text = "${(item.clock.secs / 60).toInt()}'",
+            text = item.time,
             maxLines = 1,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelSmall
         )
     }
-}
-
-private fun formatFutureMatch(item: FixturesItem): String {
-    val match = Instant.fromEpochMilliseconds(item.kickoff.millis)
-    val localDateTime = match.toLocalDateTime(TimeZone.currentSystemDefault())
-    return "${localDateTime.hour.toString().padStart(2, '0')}:${
-        localDateTime.minute.toString().padStart(2, '0')
-    }"
-}
-
-private fun formatHistoricMatch(item: FixturesItem): String {
-    item.teams[0].score
-    return "${item.teams[0].score} : ${item.teams[1].score}"
 }
