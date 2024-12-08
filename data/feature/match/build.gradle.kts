@@ -23,7 +23,7 @@ dependencies {
 
     implementation(libs.ktor.serialization.kotlinx.json)
 
-
+    testImplementation(libs.turbine)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
