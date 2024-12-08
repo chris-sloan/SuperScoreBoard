@@ -21,3 +21,23 @@ dependencyResolutionManagement {
 
 rootProject.name = "SuperScoreBoard"
 include(":app")
+
+include(":data")
+include(":data:feature")
+include(":data:feature:fixtures")
+include(":data:feature:match")
+include(":data:network")
+
+include(":domain")
+include(":domain:common")
+include(":domain:common:model")
+include(":domain:feature")
+include(":domain:feature:fixtures")
+include(":domain:feature:match")
+
+include(":ui")
+include(":ui:common")
+include(":ui:theme")
+include(":ui:feature")
+include(":ui:feature:fixtures")
+include(":ui:feature:match")

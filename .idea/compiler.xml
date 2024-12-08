@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="SuperScoreBoard.data.feature.main" target="11" />
+      <module name="SuperScoreBoard.data.feature.test" target="11" />
+      <module name="SuperScoreBoard.data.main" target="11" />
+      <module name="SuperScoreBoard.data.test" target="11" />
+      <module name="SuperScoreBoard.domain.common.main" target="11" />
+      <module name="SuperScoreBoard.domain.common.test" target="11" />
+      <module name="SuperScoreBoard.domain.feature.main" target="11" />
+      <module name="SuperScoreBoard.domain.feature.test" target="11" />
+      <module name="SuperScoreBoard.domain.main" target="11" />
+      <module name="SuperScoreBoard.domain.test" target="11" />
+      <module name="SuperScoreBoard.ui.feature.main" target="11" />
+      <module name="SuperScoreBoard.ui.feature.test" target="11" />
+      <module name="SuperScoreBoard.ui.mylibrary" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

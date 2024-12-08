@@ -11,6 +11,23 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/feature" />
+            <option value="$PROJECT_DIR$/data/feature/fixtures" />
+            <option value="$PROJECT_DIR$/data/feature/match" />
+            <option value="$PROJECT_DIR$/data/network" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/common" />
+            <option value="$PROJECT_DIR$/domain/common/model" />
+            <option value="$PROJECT_DIR$/domain/feature" />
+            <option value="$PROJECT_DIR$/domain/feature/fixtures" />
+            <option value="$PROJECT_DIR$/domain/feature/match" />
+            <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/ui/common" />
+            <option value="$PROJECT_DIR$/ui/feature" />
+            <option value="$PROJECT_DIR$/ui/feature/fixtures" />
+            <option value="$PROJECT_DIR$/ui/feature/match" />
+            <option value="$PROJECT_DIR$/ui/theme" />
           </set>
         </option>
       </GradleProjectSettings>

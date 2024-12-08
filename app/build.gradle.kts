@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("kotlin-parcelize")
     kotlin("plugin.serialization") version "2.0.0"
+    id("com.autonomousapps.dependency-analysis")
 }
 
 android {
@@ -45,43 +45,41 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(project(":data:network"))
+    implementation(project(":data:feature:fixtures"))
+    implementation(project(":data:feature:match"))
+
+    implementation(project(":domain:common:model"))
+    implementation(project(":domain:feature:fixtures"))
+    implementation(project(":domain:feature:match"))
+
+    implementation(project(":ui:common"))
+    implementation(project(":ui:theme"))
+    implementation(project(":ui:feature:fixtures"))
+    implementation(project(":ui:feature:match"))
+
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.adaptive)
     implementation(libs.androidx.adaptive.layout)
     implementation(libs.androidx.adaptive.navigation)
-    implementation(libs.kotlinx.serialization.json)
     implementation(project.dependencies.platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
-    implementation(libs.koin.androidx.compose.navigation)
-    implementation(libs.kotlinx.coroutines.android)
-
-
-    implementation (libs.kotlinx.datetime)
-    implementation(libs.coil.compose)
+    runtimeOnly(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.foundation.layout)
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.coil.network.okhttp)
 
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    
+    androidTestImplementation(libs.androidx.monitor)
+    androidTestImplementation(libs.junit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    debugRuntimeOnly(libs.androidx.ui.test.manifest)
 }

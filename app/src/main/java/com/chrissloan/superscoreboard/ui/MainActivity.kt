@@ -17,16 +17,10 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.chrissloan.superscoreboard.domain.common.model.FixturesItem
-import com.chrissloan.superscoreboard.ui.fixtures.FixtureList
-import com.chrissloan.superscoreboard.ui.fixtures.FixturesScreen
-import com.chrissloan.superscoreboard.ui.fixtures.FixturesViewModel
-import com.chrissloan.superscoreboard.ui.match.MatchDetailScreen
-import com.chrissloan.superscoreboard.ui.theme.SuperScoreBoardTheme
-import org.koin.androidx.compose.koinViewModel
+import com.chrissloan.superscoreboard.fixtures.FixturesScreen
+import com.chrissloan.superscoreboard.match.MatchDetailScreen
+import com.chrissloan.superscoreboard.theme.SuperScoreBoardTheme
 
 
 class MainActivity : ComponentActivity() {
