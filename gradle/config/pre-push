@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+####################################################
+#
+# PRE PUSH
+# Runs basic checks against the codebase to catch
+# CI issues locally
+#
+####################################################
+
+from sys import exit
+from subprocess import call
+
+def does_index_contain_changes():
+    return call(["git", "diff", "--cached", "--quiet"]) != 0
+
+def stash_changes():
+    call(["git", "stash"])
+
+
+def unstash_changes():
+    call(["git", "stash", "pop"])
+
+def run_checks():
+    return call(["./gradlew", "lintDebug", "detekt", "testDebugUnitTest"])
+
+def add_changes_to_index():
+    call(["git", "add", "."])
+
+def main():
+    add_changes_to_index()
+    index_has_changes = does_index_contain_changes()
+
+    if index_has_changes:
+        stash_changes()
+
+    exit_code = run_checks()
+
+    if exit_code == 0:
+        if index_has_changes:
+            unstash_changes()
+
+    exit(exit_code)
+
+if __name__ == "__main__":
+    main()
