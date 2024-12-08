@@ -30,10 +30,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.chrissloan.superscoreboard.common.TeamBadge
-import com.chrissloan.superscoreboard.model.Match
+import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState
+import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.ScoreState
+import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.ScorerState
+import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.TeamState
 
 @Composable
-fun MatchDetailCard(match: Match) {
+fun MatchDetailCard(match: MatchState) {
     Card(
         modifier = Modifier.padding(8.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
@@ -41,41 +44,38 @@ fun MatchDetailCard(match: Match) {
 
         ) {
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            item { Score(match = match) }
-            scorers(this, match)
+            item { Score(match.homeTeam, match.awayTeam, match.score) }
+            scorers(this, match.scorers)
             item { HorizontalDivider(modifier = Modifier.padding(8.dp)) }
-            item { MatchDetails(match = match) }
+            item { MatchDetails(match = match.details) }
         }
     }
 }
 
 @Composable
-fun Score(match: Match) {
-    val teams = match.teams
-    if (teams.isEmpty()) return
-    val halfTimeScore = match.halfTimeScore
+fun Score(homeTeam: TeamState, awayTeam: TeamState, score: ScoreState) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TeamBadge(id = teams.first().team.id, modifier = Modifier.size(48.dp))
+        TeamBadge(id = homeTeam.id, modifier = Modifier.size(48.dp))
         TeamNameAbbr(
-            abbreviatedName = teams.first().team.club.abbr,
+            abbreviatedName = homeTeam.name,
             textAlign = TextAlign.Start
         )
         ScoreBox(
-            homeScore = teams.first().score,
-            awayScore = teams.last().score,
-            homeHtScore = halfTimeScore.homeScore,
-            awayHtScore = halfTimeScore.awayScore
+            homeScore = score.homeScore,
+            awayScore = score.awayScore,
+            homeHtScore = score.homeHtScore,
+            awayHtScore = score.awayHtScore
         )
         TeamNameAbbr(
-            abbreviatedName = teams.last().team.club.abbr,
+            abbreviatedName = awayTeam.name,
             textAlign = TextAlign.End
         )
-        TeamBadge(id = teams.last().team.id, modifier = Modifier.size(48.dp))
+        TeamBadge(id = awayTeam.id, modifier = Modifier.size(48.dp))
     }
 }
 
@@ -128,62 +128,46 @@ fun ScoreBox(homeScore: Int, awayScore: Int, homeHtScore: Int, awayHtScore: Int)
 }
 
 
-fun scorers(scope: LazyListScope, match: Match) {
-    val events = match.events.filter { it.type == "G" }
-    if (events.isEmpty()) return
-    val homeTeamId = match.teams.first().team.id
-    val awayTeamId = match.teams.last().team.id
-    events.forEach { event ->
+fun scorers(scope: LazyListScope, scorers: List<ScorerState>) {
+    if (scorers.isEmpty()) return
+    scorers.forEach { scorer ->
         scope.item {
-            match.teamLists
-                .firstOrNull {
-                    it.teamId == event.teamId
-                }
-                ?.lineup?.firstOrNull {
-                    it.id == event.personId
-                }
-                ?.let { player ->
-                    val playerName = player.name.last
-                    val eventTime = event.clock.label.substring(0, 3)
-                    val scorerText =
-                        buildAnnotatedString {
-                            append(eventTime)
-                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                append(" Goal ")
-                            }
-                            append("- $playerName")
-                        }
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(horizontal = 8.dp),
-                            text = if (event.teamId == homeTeamId) scorerText else AnnotatedString(
-                                ""
-                            ),
-                            textAlign = TextAlign.End
-                        )
-                        Text(
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(horizontal = 8.dp),
-                            text = if (event.teamId == awayTeamId) scorerText else AnnotatedString(
-                                ""
-                            ),
-                            textAlign = TextAlign.Start
-                        )
+            val scorerText =
+                buildAnnotatedString {
+                    append(scorer.time)
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(" Goal ")
                     }
+                    append("- ${scorer.playerName}")
                 }
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 8.dp),
+                    text = if (scorer.homePlayer) scorerText else AnnotatedString(
+                        ""
+                    ),
+                    textAlign = TextAlign.End
+                )
+                Text(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 8.dp),
+                    text = if (!scorer.homePlayer) scorerText else AnnotatedString(
+                        ""
+                    ),
+                    textAlign = TextAlign.Start
+                )
+            }
         }
     }
 }
 
 @Composable
-fun MatchDetails(match: Match) {
-    if (match.matchOfficials.isEmpty()) return
-
+fun MatchDetails(match: MatchState.MatchDetail) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -191,16 +175,11 @@ fun MatchDetails(match: Match) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(
-            text = "Kick Off: ${
-                match.kickoff.label.split(",").lastOrNull()?.split(" ")?.dropWhile { it.isEmpty() }
-                    ?.first().orEmpty()
-            }"
-        )
-        Text(text = match.kickoff.label.split(",").first())
-        Text(text = "${match.ground.name}, ${match.ground.city}")
+        Text(text = "Kick Off: ${match.kickOffTime}")
+        Text(text = match.date)
+        Text(text = match.location)
         Text(text = "Attendance: ${match.attendance}")
-        Text(text = "Referee: ${match.matchOfficials.first().name.display}")
+        Text(text = "Referee: ${match.referee}")
 
     }
 }

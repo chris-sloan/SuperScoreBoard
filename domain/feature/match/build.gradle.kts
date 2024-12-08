@@ -15,4 +15,5 @@ kotlin {
 }
 dependencies {
     implementation(project(":domain:common:model"))
+    implementation(libs.kotlinx.coroutines.android)
 }

@@ -8,7 +8,8 @@ import com.chrissloan.superscoreboard.fixtures.FixtureListRepository
 import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesReducer
 import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesViewModel
 import com.chrissloan.superscoreboard.match.MatchDetailRepository
-import com.chrissloan.superscoreboard.match.MatchDetailViewModel
+import com.chrissloan.superscoreboard.match.viewmodel.MatchDetailReducer
+import com.chrissloan.superscoreboard.match.viewmodel.MatchDetailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -30,6 +31,7 @@ object Dependencies {
         factoryOf(::FixturesReducer)
         viewModelOf(::FixturesViewModel)
 
+        factoryOf(::MatchDetailReducer)
         viewModelOf(::MatchDetailViewModel)
     }
 }
