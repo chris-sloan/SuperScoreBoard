@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.testImplementation
+
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
@@ -22,4 +24,8 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
 
     implementation(libs.ktor.serialization.kotlinx.json)
+
+    testImplementation(libs.junit.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
