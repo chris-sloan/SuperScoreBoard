@@ -1,8 +1,4 @@
-import com.android.tools.r8.internal.md
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
-import org.gradle.internal.impldep.org.jsoup.nodes.Document.OutputSettings.Syntax.html
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
-import org.gradle.kotlin.dsl.implementation
 
 plugins {
     alias(libs.plugins.android.application)
@@ -46,13 +42,16 @@ android {
     buildFeatures {
         compose = true
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 }
 
 detekt {
     buildUponDefaultConfig = true
     allRules = true
     autoCorrect = true
-    baseline = file("$rootDir/baseline.xml")
+    baseline = file("$rootDir/config/detekt/baseline.xml")
     reports {
         txt.enabled = true
         html.enabled = true
@@ -63,11 +62,12 @@ detekt {
 val detektProjectBaseline by tasks.registering(DetektCreateBaselineTask::class) {
     description = "Overrides current baseline."
     buildUponDefaultConfig.set(true)
+    autoCorrect.set(true)
     ignoreFailures.set(true)
     parallel.set(true)
     setSource(files(rootDir))
-    config.setFrom(files("$rootDir/detekt.yml"))
-    baseline.set(file("$rootDir/baseline.xml"))
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
+    baseline.set(file("$rootDir/config/detekt/baseline.xml"))
     include("**/*.kt")
     include("**/*.kts")
     exclude("**/resources/**")
@@ -88,7 +88,6 @@ dependencies {
     implementation(project(":ui:theme"))
     implementation(project(":ui:feature:fixtures"))
     implementation(project(":ui:feature:match"))
-
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

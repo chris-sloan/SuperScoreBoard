@@ -7,6 +7,7 @@ import io.ktor.client.call.body
 
 
 class MatchDetailApi : BaseApi() {
+    @Suppress("IgnoreUnusedParameter")
     suspend fun getMatch(id: Int) =
         // we would use the id here to fetch the correct match
         try {

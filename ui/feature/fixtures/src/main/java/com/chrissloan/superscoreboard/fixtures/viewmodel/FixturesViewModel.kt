@@ -35,7 +35,7 @@ class FixturesViewModel(
             fixtureListRepository.getFixtures()
                 .map {
                     FixturesEvent.FixturesLoaded(it)
-                     },
+                },
         )
 
     private fun Flow<FixturesEvent>.reduceState() =

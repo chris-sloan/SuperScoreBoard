@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>MagicNumber:FixturesList.kt$0xFF51E79A</ID>
+    <ID>MagicNumber:MatchDetailCard.kt$0xFF51E79A</ID>
+    <ID>MagicNumber:MatchDetailReducer.kt$MatchDetailReducer$3</ID>
+    <ID>NewLineAtEndOfFile:AltIds.kt$com.chrissloan.superscoreboard.model.AltIds.kt</ID>
+    <ID>NewLineAtEndOfFile:BaseApi.kt$com.chrissloan.superscoreboard.data.network.BaseApi.kt</ID>
+    <ID>NewLineAtEndOfFile:Birth.kt$com.chrissloan.superscoreboard.model.Birth.kt</ID>
+    <ID>NewLineAtEndOfFile:Clock.kt$com.chrissloan.superscoreboard.model.Clock.kt</ID>
+    <ID>NewLineAtEndOfFile:Club.kt$com.chrissloan.superscoreboard.model.Club.kt</ID>
+    <ID>NewLineAtEndOfFile:Color.kt$com.chrissloan.superscoreboard.theme.Color.kt</ID>
+    <ID>NewLineAtEndOfFile:Country.kt$com.chrissloan.superscoreboard.model.Country.kt</ID>
+    <ID>NewLineAtEndOfFile:Date.kt$com.chrissloan.superscoreboard.model.Date.kt</ID>
+    <ID>NewLineAtEndOfFile:Event.kt$com.chrissloan.superscoreboard.model.Event.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleInstrumentedTest.kt$com.chrissloan.superscoreboard.ExampleInstrumentedTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleInstrumentedTest.kt$com.chrissloan.superscoreboard.common.ExampleInstrumentedTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleInstrumentedTest.kt$com.chrissloan.superscoreboard.theme.ExampleInstrumentedTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleUnitTest.kt$com.chrissloan.superscoreboard.common.ExampleUnitTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleUnitTest.kt$com.chrissloan.superscoreboard.fixtures.ExampleUnitTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleUnitTest.kt$com.chrissloan.superscoreboard.theme.ExampleUnitTest.kt</ID>
+    <ID>NewLineAtEndOfFile:FixtureListRepository.kt$com.chrissloan.superscoreboard.fixtures.FixtureListRepository.kt</ID>
+    <ID>NewLineAtEndOfFile:FixtureListRepositoryImpl.kt$com.chrissloan.superscoreboard.data.fixtures.FixtureListRepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:Fixtures.kt$com.chrissloan.superscoreboard.model.Fixtures.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesApi.kt$com.chrissloan.superscoreboard.data.fixtures.FixturesApi.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesEvent.kt$com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesEvent.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesItem.kt$com.chrissloan.superscoreboard.model.FixturesItem.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesList.kt$com.chrissloan.superscoreboard.fixtures.FixturesList.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesReducer.kt$com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesReducer.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesReducerTest.kt$com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesReducerTest.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesScreen.kt$com.chrissloan.superscoreboard.fixtures.FixturesScreen.kt</ID>
+    <ID>NewLineAtEndOfFile:FixturesUiState.kt$com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.kt</ID>
+    <ID>NewLineAtEndOfFile:Formation.kt$com.chrissloan.superscoreboard.model.Formation.kt</ID>
+    <ID>NewLineAtEndOfFile:Goal.kt$com.chrissloan.superscoreboard.model.Goal.kt</ID>
+    <ID>NewLineAtEndOfFile:Ground.kt$com.chrissloan.superscoreboard.model.Ground.kt</ID>
+    <ID>NewLineAtEndOfFile:HalfTimeScore.kt$com.chrissloan.superscoreboard.model.HalfTimeScore.kt</ID>
+    <ID>NewLineAtEndOfFile:Info.kt$com.chrissloan.superscoreboard.model.Info.kt</ID>
+    <ID>NewLineAtEndOfFile:Kickoff.kt$com.chrissloan.superscoreboard.model.Kickoff.kt</ID>
+    <ID>NewLineAtEndOfFile:Lineup.kt$com.chrissloan.superscoreboard.model.Lineup.kt</ID>
+    <ID>NewLineAtEndOfFile:Match.kt$com.chrissloan.superscoreboard.model.Match.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailApi.kt$com.chrissloan.superscoreboard.data.match.MatchDetailApi.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailCard.kt$com.chrissloan.superscoreboard.match.MatchDetailCard.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailReducer.kt$com.chrissloan.superscoreboard.match.viewmodel.MatchDetailReducer.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailReducerTest.kt$com.chrissloan.superscoreboard.match.viewmodel.MatchDetailReducerTest.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailRepositoryImpl.kt$com.chrissloan.superscoreboard.data.match.MatchDetailRepositoryImpl.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailRepositoryImplTest.kt$com.chrissloan.superscoreboard.data.match.MatchDetailRepositoryImplTest.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchDetailUiState.kt$com.chrissloan.superscoreboard.match.state.MatchDetailUiState.kt</ID>
+    <ID>NewLineAtEndOfFile:MatchOfficial.kt$com.chrissloan.superscoreboard.model.MatchOfficial.kt</ID>
+    <ID>NewLineAtEndOfFile:Name.kt$com.chrissloan.superscoreboard.model.Name.kt</ID>
+    <ID>NewLineAtEndOfFile:NationalTeam.kt$com.chrissloan.superscoreboard.model.NationalTeam.kt</ID>
+    <ID>NewLineAtEndOfFile:Score.kt$com.chrissloan.superscoreboard.model.Score.kt</ID>
+    <ID>NewLineAtEndOfFile:Substitute.kt$com.chrissloan.superscoreboard.model.Substitute.kt</ID>
+    <ID>NewLineAtEndOfFile:Team.kt$com.chrissloan.superscoreboard.model.Team.kt</ID>
+    <ID>NewLineAtEndOfFile:TeamLists.kt$com.chrissloan.superscoreboard.model.TeamLists.kt</ID>
+    <ID>NewLineAtEndOfFile:TeamX.kt$com.chrissloan.superscoreboard.model.TeamX.kt</ID>
+    <ID>NewLineAtEndOfFile:TestFixtures.kt$com.chrissloan.superscoreboard.fixtures.viewmodel.TestFixtures.kt</ID>
+    <ID>NewLineAtEndOfFile:TestFixtures.kt$com.chrissloan.superscoreboard.match.viewmodel.TestFixtures.kt</ID>
+    <ID>NewLineAtEndOfFile:Theme.kt$com.chrissloan.superscoreboard.theme.Theme.kt</ID>
+    <ID>NewLineAtEndOfFile:Time.kt$com.chrissloan.superscoreboard.model.Time.kt</ID>
+    <ID>NewLineAtEndOfFile:Type.kt$com.chrissloan.superscoreboard.theme.Type.kt</ID>
+    <ID>NewLineAtEndOfFile:build.gradle.kts$.build.gradle.kts</ID>
+    <ID>TooGenericExceptionCaught:FixturesApi.kt$FixturesApi$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:MatchDetailApi.kt$MatchDetailApi$e: Exception</ID>
+    <ID>UnusedParameter:MatchDetailApi.kt$MatchDetailApi$id: Int</ID>
+  </CurrentIssues>
+</SmellBaseline>
