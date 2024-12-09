@@ -1,5 +1,6 @@
 package com.chrissloan.superscoreboard.match
 
+import android.R.attr.text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,7 @@ import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState
 import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.ScoreState
 import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.ScorerState
 import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.TeamState
+import com.chrissloan.superscoreboard.theme.LocalFixedAccentColors
 
 @Composable
 fun MatchDetailCard(match: MatchState) {
@@ -116,7 +118,7 @@ fun ScoreBox(homeScore: Int, awayScore: Int, homeHtScore: Int, awayHtScore: Int)
             .wrapContentHeight()
             .padding(top = 16.dp)
             .clip(RoundedCornerShape(4.dp))
-            .background(Color(0xFF51E79A)),
+            .background(LocalFixedAccentColors.current.inProgressBackground),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -124,6 +126,7 @@ fun ScoreBox(homeScore: Int, awayScore: Int, homeHtScore: Int, awayHtScore: Int)
                 .padding(horizontal = 6.dp, vertical = 2.dp),
             text = "$homeScore - $awayScore",
             maxLines = 1,
+            color = LocalFixedAccentColors.current.onInProgressBackground,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.titleLarge
@@ -134,6 +137,7 @@ fun ScoreBox(homeScore: Int, awayScore: Int, homeHtScore: Int, awayHtScore: Int)
                 vertical = 2.dp
             ),
             text = "HT $homeHtScore - $awayHtScore",
+            color = LocalFixedAccentColors.current.onInProgressBackground,
             maxLines = 1,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelSmall
@@ -189,11 +193,41 @@ fun MatchDetails(match: MatchState.MatchDetail) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(text = "Kick Off: ${match.kickOffTime}")
-        Text(text = match.date)
-        Text(text = match.location)
-        Text(text = "Attendance: ${match.attendance}")
-        Text(text = "Referee: ${match.referee}")
-
+        Text(
+            text =
+                buildAnnotatedString {
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append("Kick Off: ")
+                    }
+                    append(match.kickOffTime)
+                },
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = match.date,
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = match.location,
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append("Attendance: ")
+                }
+                append("${match.attendance}")
+            },
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append("Referee: ")
+                }
+                append(match.referee)
+            },
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
