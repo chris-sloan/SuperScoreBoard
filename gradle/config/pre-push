@@ -22,7 +22,7 @@ def unstash_changes():
     call(["git", "stash", "pop"])
 
 def run_checks():
-    return call(["./gradlew", "lintDebug", "detekt", "testDebugUnitTest"])
+    return call(["./gradlew", "lintDebug", "detektMain", "testDebugUnitTest"])
 
 def add_changes_to_index():
     call(["git", "add", "."])

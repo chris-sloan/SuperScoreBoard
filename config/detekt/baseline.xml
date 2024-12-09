@@ -2,9 +2,8 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>MagicNumber:FixturesList.kt$0xFF51E79A</ID>
-    <ID>MagicNumber:MatchDetailCard.kt$0xFF51E79A</ID>
     <ID>MagicNumber:MatchDetailReducer.kt$MatchDetailReducer$3</ID>
+    <ID>MagicNumber:Theme.kt$0xFF51E79A</ID>
     <ID>NewLineAtEndOfFile:AltIds.kt$com.chrissloan.superscoreboard.model.AltIds.kt</ID>
     <ID>NewLineAtEndOfFile:BaseApi.kt$com.chrissloan.superscoreboard.data.network.BaseApi.kt</ID>
     <ID>NewLineAtEndOfFile:Birth.kt$com.chrissloan.superscoreboard.model.Birth.kt</ID>
