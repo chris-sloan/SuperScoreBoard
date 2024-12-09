@@ -1,6 +1,6 @@
 package com.chrissloan.superscoreboard.fixtures
 
-import androidx.compose.foundation.BorderStroke
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,10 +24,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.chrissloan.superscoreboard.common.LoadingSpinner
 import com.chrissloan.superscoreboard.common.TeamBadge
 import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.FixtureState
 import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.FixtureState.MatchStatus
 
+@SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
 fun FixtureList(
     fixtures: List<FixtureState>,
@@ -38,12 +40,18 @@ fun FixtureList(
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.secondary)
     ) {
-        fixtures.forEach { item ->
+        if (fixtures.isEmpty()) {
             item {
-                Fixture(
-                    item = item,
-                    onItemClick = onItemClick,
-                )
+                LoadingSpinner()
+            }
+        } else {
+            fixtures.forEach { item ->
+                item {
+                    Fixture(
+                        item = item,
+                        onItemClick = onItemClick,
+                    )
+                }
             }
         }
     }
@@ -60,17 +68,13 @@ fun Fixture(
     ) {
         Card(
             modifier = Modifier
-                .padding(4.dp)
+                .padding(8.dp)
                 .clickable {
                     onItemClick(item.id)
 
                 },
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            border = if (item.status is MatchStatus.InProgress) BorderStroke(
-                1.dp,
-                Color(0xFF51E79A)
-            ) else null,
         ) {
             Row(
                 modifier = Modifier

@@ -17,10 +17,10 @@ data class MatchDetailUiState(
         )
 
         data class ScoreState(
-            val homeScore: Int = 0,
-            val awayScore: Int = 0,
-            val homeHtScore: Int = 0,
-            val awayHtScore: Int = 0,
+            val homeScore: Int = -1,
+            val awayScore: Int = -1,
+            val homeHtScore: Int = -1,
+            val awayHtScore: Int = -1,
         )
 
         data class ScorerState(

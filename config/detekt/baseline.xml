@@ -38,8 +38,8 @@
     <ID>NewLineAtEndOfFile:Info.kt$com.chrissloan.superscoreboard.model.Info.kt</ID>
     <ID>NewLineAtEndOfFile:Kickoff.kt$com.chrissloan.superscoreboard.model.Kickoff.kt</ID>
     <ID>NewLineAtEndOfFile:Lineup.kt$com.chrissloan.superscoreboard.model.Lineup.kt</ID>
+    <ID>NewLineAtEndOfFile:LoadingSpinner.kt$com.chrissloan.superscoreboard.common.LoadingSpinner.kt</ID>
     <ID>NewLineAtEndOfFile:Match.kt$com.chrissloan.superscoreboard.model.Match.kt</ID>
-    <ID>NewLineAtEndOfFile:MatchDetailApi.kt$com.chrissloan.superscoreboard.data.match.MatchDetailApi.kt</ID>
     <ID>NewLineAtEndOfFile:MatchDetailCard.kt$com.chrissloan.superscoreboard.match.MatchDetailCard.kt</ID>
     <ID>NewLineAtEndOfFile:MatchDetailReducer.kt$com.chrissloan.superscoreboard.match.viewmodel.MatchDetailReducer.kt</ID>
     <ID>NewLineAtEndOfFile:MatchDetailReducerTest.kt$com.chrissloan.superscoreboard.match.viewmodel.MatchDetailReducerTest.kt</ID>
@@ -60,8 +60,8 @@
     <ID>NewLineAtEndOfFile:Time.kt$com.chrissloan.superscoreboard.model.Time.kt</ID>
     <ID>NewLineAtEndOfFile:Type.kt$com.chrissloan.superscoreboard.theme.Type.kt</ID>
     <ID>NewLineAtEndOfFile:build.gradle.kts$.build.gradle.kts</ID>
-    <ID>TooGenericExceptionCaught:FixturesApi.kt$FixturesApi$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:MatchDetailApi.kt$MatchDetailApi$e: Exception</ID>
+    <ID>NewLineAtEndOfFile:installPrePush.gradle.kts$.installPrePush.gradle.kts</ID>
+    <ID>TooGenericExceptionCaught:BaseApi.kt$BaseApi$e: Exception</ID>
     <ID>UnusedParameter:MatchDetailApi.kt$MatchDetailApi$id: Int</ID>
   </CurrentIssues>
 </SmellBaseline>

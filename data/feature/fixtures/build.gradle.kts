@@ -19,10 +19,6 @@ dependencies {
     implementation(project(":domain:common:model"))
     implementation(project(":domain:feature:fixtures"))
 
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.content.negotiation)
-
     implementation(libs.ktor.serialization.kotlinx.json)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

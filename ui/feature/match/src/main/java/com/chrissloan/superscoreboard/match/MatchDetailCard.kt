@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.chrissloan.superscoreboard.common.LoadingSpinner
 import com.chrissloan.superscoreboard.common.TeamBadge
 import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState
 import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.ScoreState
@@ -37,17 +38,30 @@ import com.chrissloan.superscoreboard.match.state.MatchDetailUiState.MatchState.
 
 @Composable
 fun MatchDetailCard(match: MatchState) {
-    Card(
-        modifier = Modifier.padding(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-
-        ) {
-        LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            item { Score(match.homeTeam, match.awayTeam, match.score) }
-            scorers(this, match.scorers)
-            item { HorizontalDivider(modifier = Modifier.padding(8.dp)) }
-            item { MatchDetails(match = match.details) }
+    Column(
+        verticalArrangement = Arrangement.Top
+    ) {
+        if (match.score.homeScore < 0) {
+            LoadingSpinner()
+        } else {
+            Card(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp, vertical = 24.dp)
+                    .wrapContentHeight(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 24.dp)
+                ) {
+                    item { Score(match.homeTeam, match.awayTeam, match.score) }
+                    scorers(this, match.scorers)
+                    item { HorizontalDivider(modifier = Modifier.padding(8.dp)) }
+                    item { MatchDetails(match = match.details) }
+                }
+            }
         }
     }
 }
