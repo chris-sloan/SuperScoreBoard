@@ -6,7 +6,9 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-class FixturesReducer {
+interface Reducer<CurrentState, Event, ReturnState>
+
+class FixturesReducer : Reducer<FixturesUiState, FixturesEvent, FixturesUiState> {
     operator fun invoke(currentState: FixturesUiState, event: FixturesEvent): FixturesUiState {
         return when (event) {
             FixturesEvent.Init -> currentState

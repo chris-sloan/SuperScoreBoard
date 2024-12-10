@@ -20,6 +20,15 @@ fun MatchDetailScreen(
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle(initialValue = MatchDetailUiState())
 
+/*
+    val actionHandler = { action: UserAction ->
+        when (action) {
+            is NavigationAction -> navigationHandler(action)
+            is MatchDetailAction -> viewModel::onAction
+            else -> Unit // ignore other actions.
+        }
+    }
+*/
     val currentLifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(key1 = currentLifecycleOwner) {
         val lifecycle = currentLifecycleOwner.lifecycle
@@ -37,6 +46,6 @@ fun MatchDetailScreen(
         }
     }
 
+    // pass action handler down if needed.
     MatchDetailCard(uiState.match)
 }
-

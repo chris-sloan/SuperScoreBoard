@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import com.chrissloan.superscoreboard.fixtures.FixturesScreen
 import com.chrissloan.superscoreboard.match.MatchDetailScreen
 import com.chrissloan.superscoreboard.theme.SuperScoreBoardTheme
+import com.chrissloan.superscoreboard.useraction.NavigationAction
 
 
 class MainActivity : ComponentActivity() {
@@ -46,6 +47,16 @@ fun SuperScoreBoard() {
     BackHandler(navigator.canNavigateBack()) {
         navigator.navigateBack()
     }
+
+    val navigationHandler: (NavigationAction) -> Unit = { action ->
+        when (action) {
+            is NavigationAction.OnFixtureClick -> {
+                navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, action.id)
+            }
+            // other navigation events
+        }
+    }
+
     Scaffold(containerColor = MaterialTheme.colorScheme.secondary) {
         ListDetailPaneScaffold(
             modifier = Modifier.padding(paddingValues = it),
@@ -53,14 +64,11 @@ fun SuperScoreBoard() {
             value = navigator.scaffoldValue,
             listPane = {
                 AnimatedPane {
-                    FixturesScreen(onItemClick = { item ->
-                        navigator.navigateTo(ListDetailPaneScaffoldRole.Detail, item)
-                    })
+                    FixturesScreen(navigationHandler = navigationHandler)
                 }
             },
             detailPane = {
                 AnimatedPane {
-                    // Show the detail pane content if selected item is available
                     navigator.currentDestination?.content?.let {
                         MatchDetailScreen(it)
                     }

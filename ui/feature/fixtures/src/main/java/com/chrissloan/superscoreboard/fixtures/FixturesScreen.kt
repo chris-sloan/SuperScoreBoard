@@ -11,14 +11,25 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState
 import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesViewModel
 import com.chrissloan.superscoreboard.theme.SuperScoreBoardTheme
+import com.chrissloan.superscoreboard.useraction.FixturesAction
+import com.chrissloan.superscoreboard.useraction.NavigationAction
+import com.chrissloan.superscoreboard.useraction.UserAction
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun FixturesScreen(
-    onItemClick: (Int) -> Unit,
+    navigationHandler: (NavigationAction) -> Unit,
     viewModel: FixturesViewModel = koinViewModel<FixturesViewModel>(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle(initialValue = FixturesUiState())
+
+    val actionHandler: (UserAction) -> Unit = { action ->
+        when (action) {
+            is NavigationAction -> navigationHandler(action)
+            is FixturesAction -> viewModel::onAction
+            // I feel this needs an else.
+        }
+    }
 
     val currentLifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(key1 = currentLifecycleOwner) {
@@ -36,12 +47,12 @@ fun FixturesScreen(
             lifecycle.removeObserver(observer)
         }
     }
-    FixtureList(uiState.fixtures, onItemClick)
+    FixtureList(uiState.fixtures, actionHandler)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun FixturesPreview() {
     SuperScoreBoardTheme {
         FixturesScreen({})
     }

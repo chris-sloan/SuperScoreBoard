@@ -46,8 +46,11 @@ For all your up to the minute scores from around the globe.
 
 4. ## Next Steps
 
+   ### App
    - App icon / Splash / Branding
    - Filter the Fixtures list. 
-   - Introduce Custom Gradle Plugins to reduce boilerplate when adding new modules / features. 
-   - Introduce a BaseViewModel to encapsulate the uni-directional data flow solution into a single place, reducing more boiler plate.
+   
+   ### Engineering
+   - Introduce Custom Gradle Plugins to reduce boilerplate when adding new modules / features.
    - UI / Integration / Screenshot tests.
+   - CI/CD pipelines

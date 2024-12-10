@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.chrissloan.superscoreboard.match"
+    namespace = "com.chrissloan.superscoreboard.fixtures"
     compileSdk = 35
 
     defaultConfig {
@@ -43,10 +43,8 @@ android {
 dependencies {
     implementation(project(":domain:common:model"))
     implementation(project(":domain:common:useraction"))
-    implementation(project(":domain:feature:match"))
     implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
-    implementation(project(":ui:mvi"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.material3)
@@ -59,6 +57,8 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.compose.navigation)
+
+    implementation (libs.kotlinx.datetime)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

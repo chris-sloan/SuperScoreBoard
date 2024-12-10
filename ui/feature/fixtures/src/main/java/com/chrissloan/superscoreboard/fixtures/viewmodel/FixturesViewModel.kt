@@ -1,35 +1,22 @@
 package com.chrissloan.superscoreboard.fixtures.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.chrissloan.superscoreboard.fixtures.FixtureListRepository
 import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.chrissloan.superscoreboard.mvi.UniDirectionalViewModel
+import com.chrissloan.superscoreboard.useraction.FixturesAction
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
-import kotlinx.coroutines.flow.onEach
 
 class FixturesViewModel(
     private val fixtureListRepository: FixtureListRepository,
-    private val reduce: FixturesReducer,
-) : ViewModel() {
+    private val fixturesEventHandler: FixturesEventHandler,
+    private val fixturesReducer: FixturesReducer,
+) : UniDirectionalViewModel<FixturesAction, FixturesEvent, FixturesUiState>() {
 
-    private var fixturesJob: Job? = null
-    private val uiStateEmitter = MutableStateFlow(value = FixturesUiState())
-    val uiState: Flow<FixturesUiState> = uiStateEmitter
+    override fun initialState() = FixturesUiState()
 
-    fun onLifeCycleResumed() {
-        fixturesJob = fixturesEventFlow()
-            .reduceState()
-            .thenEmit()
-            .launchIn(viewModelScope)
-    }
-
-    private fun fixturesEventFlow(): Flow<FixturesEvent> =
+    override fun eventFlow() =
         merge(
             flowOf(FixturesEvent.Init),
             fixtureListRepository.getFixtures()
@@ -38,17 +25,28 @@ class FixturesViewModel(
                 },
         )
 
-    private fun Flow<FixturesEvent>.reduceState() =
-        map {
-            reduce(uiStateEmitter.value, it)
-        }
+    override fun eventHandled(event: FixturesEvent): Boolean = fixturesEventHandler(event)
 
-    private fun Flow<FixturesUiState>.thenEmit() =
-        onEach {
-            uiStateEmitter.value = it
-        }
+    override fun reduce(
+        currentState: FixturesUiState,
+        event: FixturesEvent,
+    ) = fixturesReducer(currentState, event)
 
-    fun onLifecyclePaused() {
-        fixturesJob?.cancel()
+    override fun onAction(action: FixturesAction) = fixturesActionHandler(action)
+
+    /**
+     * There could be a number of different dependencies that we would call from here.
+     * Each dependency would then handle the call and if needed
+     * emit a new event back into the view model's event flow ensuring unidirectional flow.
+     */
+    private fun fixturesActionHandler(action: FixturesAction) {
+        when (action) {
+            is FixturesAction.OnFixtureClick -> {
+                /**
+                 * We could fire some analytics here, for example.
+                 * or trigger a video playback flow in another activity.
+                 */
+            }
+        }
     }
 }

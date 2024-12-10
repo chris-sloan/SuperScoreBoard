@@ -42,9 +42,11 @@ android {
 
 dependencies {
     implementation(project(":domain:common:model"))
+    implementation(project(":domain:common:useraction"))
     implementation(project(":domain:feature:fixtures"))
     implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
+    implementation(project(":ui:mvi"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.material3)

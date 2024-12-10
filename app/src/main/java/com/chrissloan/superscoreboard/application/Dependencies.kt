@@ -6,6 +6,7 @@ import com.chrissloan.superscoreboard.data.fixtures.FixturesApi
 import com.chrissloan.superscoreboard.data.match.MatchDetailApi
 import com.chrissloan.superscoreboard.data.match.MatchDetailRepositoryImpl
 import com.chrissloan.superscoreboard.fixtures.FixtureListRepository
+import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesEventHandler
 import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesReducer
 import com.chrissloan.superscoreboard.fixtures.viewmodel.FixturesViewModel
 import com.chrissloan.superscoreboard.match.MatchDetailRepository
@@ -33,6 +34,7 @@ object Dependencies {
 
     val uiDependencies = module {
         factoryOf(::FixturesReducer)
+        factoryOf(::FixturesEventHandler)
         viewModelOf(::FixturesViewModel)
 
         factoryOf(::MatchDetailReducer)

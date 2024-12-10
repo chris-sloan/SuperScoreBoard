@@ -33,12 +33,13 @@ import com.chrissloan.superscoreboard.common.TeamBadge
 import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.FixtureState
 import com.chrissloan.superscoreboard.fixtures.state.FixturesUiState.FixtureState.MatchStatus
 import com.chrissloan.superscoreboard.theme.LocalFixedAccentColors
+import com.chrissloan.superscoreboard.useraction.NavigationAction
 
 @SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
 fun FixtureList(
     fixtures: List<FixtureState>,
-    onItemClick: (Int) -> Unit,
+    actionHandler: (NavigationAction) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -54,7 +55,7 @@ fun FixtureList(
                 item {
                     Fixture(
                         item = item,
-                        onItemClick = onItemClick,
+                        actionHandler = actionHandler,
                     )
                 }
             }
@@ -62,11 +63,10 @@ fun FixtureList(
     }
 }
 
-
 @Composable
 fun Fixture(
     item: FixtureState,
-    onItemClick: (Int) -> Unit,
+    actionHandler: (NavigationAction) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -75,8 +75,7 @@ fun Fixture(
             modifier = Modifier
                 .padding(8.dp)
                 .clickable {
-                    onItemClick(item.id)
-
+                    actionHandler(NavigationAction.OnFixtureClick(item.id))
                 },
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),

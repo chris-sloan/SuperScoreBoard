@@ -49,14 +49,10 @@ android {
 
 detekt {
     buildUponDefaultConfig = true
+    autoCorrect = true
     allRules = true
     autoCorrect = true
     baseline = file("$rootDir/config/detekt/baseline.xml")
-    reports {
-        txt.enabled = true
-        html.enabled = true
-        md.enabled = true
-    }
 }
 
 val detektProjectBaseline by tasks.registering(DetektCreateBaselineTask::class) {
@@ -81,11 +77,13 @@ dependencies {
     implementation(project(":data:feature:match"))
 
     implementation(project(":domain:common:model"))
+    implementation(project(":domain:common:useraction"))
     implementation(project(":domain:feature:fixtures"))
     implementation(project(":domain:feature:match"))
 
     implementation(project(":ui:common"))
     implementation(project(":ui:theme"))
+    implementation(project(":ui:mvi"))
     implementation(project(":ui:feature:fixtures"))
     implementation(project(":ui:feature:match"))
 
