@@ -47,10 +47,36 @@ For all your up to the minute scores from around the globe.
 4. ## Next Steps
 
    ### App
-   - App icon / Splash / Branding
-   - Filter the Fixtures list. 
-   
+   - Data Store
+   - Room
+   - Network Abstractions - Auth client etc.
+   - Resources Module - SSOT for strings?
+   - Feature Flags / Crashlytics / Analytics /
+   - Paging
+   - Notifications
+   - biometrics
+   - Utility extensions - Strings, Dates, etc etc. 
+   - Back up? 
+   - 
+
    ### Engineering
    - Introduce Custom Gradle Plugins to reduce boilerplate when adding new modules / features.
    - UI / Integration / Screenshot tests.
-   - CI/CD pipelines
+   - CI/CD pipelines - internal testing on pr merge and manual promotion?
+
+   ### Build Logic
+   - Gradle Convention plugins 
+   - Load all versions from toml
+   - Spotless
+   - Loading api keys via local files. 
+   - Network Proxying.
+
+   ### MVI / MVVM abstractions
+   - ApiResponse
+   - MVI ViewModel
+   - UiStateHolder / Ui State / Loading / Error State Handling
+
+   ### Compose
+   - Image / Icon Loading
+   - Design System
+   - Navigation - with transitions? 
