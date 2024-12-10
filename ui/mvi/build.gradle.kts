@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.chrissloan.superscoreboard.fixtures"
+    namespace = "com.chrissloan.superscoreboard.mvi"
     compileSdk = 35
 
     defaultConfig {
