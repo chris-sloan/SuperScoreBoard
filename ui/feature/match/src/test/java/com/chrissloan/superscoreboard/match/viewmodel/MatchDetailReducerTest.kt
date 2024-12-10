@@ -42,7 +42,8 @@ class MatchDetailReducerTest {
         assertEquals(TeamState(1, "LIV"), newState.match.homeTeam)
         assertEquals(TeamState(2, "MUN"), newState.match.awayTeam)
         assertEquals(
-            ScoreState(homeScore = 2, awayScore = 1, homeHtScore = 1, awayHtScore = 0), newState.match.score
+            ScoreState(homeScore = 2, awayScore = 1, homeHtScore = 1, awayHtScore = 0),
+            newState.match.score
         )
         assertEquals(
             listOf(

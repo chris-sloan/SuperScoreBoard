@@ -13,7 +13,7 @@ open class BaseApi {
     val client: HttpClient by lazy { HttpClient(Android) }
     val baseUrl = "https://pyates-twocircles.github.io/two-circles-tech-test/"
 
-    suspend inline fun <reified T> fetch(path: String) : T? {
+    suspend inline fun <reified T> fetch(path: String): T? {
         var retryCount = 0
         while (retryCount < MAX_RETRIES) {
             try {

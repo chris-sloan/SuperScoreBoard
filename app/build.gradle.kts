@@ -1,4 +1,6 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.gradle.kotlin.dsl.detektPlugins
 
 plugins {
     alias(libs.plugins.android.application)
@@ -51,26 +53,36 @@ detekt {
     buildUponDefaultConfig = true
     autoCorrect = true
     allRules = true
-    autoCorrect = true
+    source.setFrom(files(rootDir))
+    config.setFrom(
+        "$rootDir/config/detekt/detekt.yml"
+    )
     baseline = file("$rootDir/config/detekt/baseline.xml")
 }
 
-val detektProjectBaseline by tasks.registering(DetektCreateBaselineTask::class) {
-    description = "Overrides current baseline."
-    buildUponDefaultConfig.set(true)
-    autoCorrect.set(true)
-    ignoreFailures.set(true)
-    parallel.set(true)
-    setSource(files(rootDir))
-    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
-    baseline.set(file("$rootDir/config/detekt/baseline.xml"))
-    include("**/*.kt")
-    include("**/*.kts")
-    exclude("**/resources/**")
-    exclude("**/build/**")
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "1.8"
+    reports {
+        html.required.set(true)
+        xml.required.set(true)
+        sarif.required.set(
+            true
+        )
+        md.required.set(true)
+        include("**/*.kt")
+        include("**/*.kts")
+        exclude("**/resources/**")
+        exclude("**/build/**")
+    }
+}
+
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = "1.8"
 }
 
 dependencies {
+
+    detektPlugins(libs.detekt.formatting)
 
     implementation(project(":data:network"))
     implementation(project(":data:feature:fixtures"))

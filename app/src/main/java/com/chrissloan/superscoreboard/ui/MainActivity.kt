@@ -2,7 +2,6 @@
 
 package com.chrissloan.superscoreboard.ui
 
-
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -25,7 +24,6 @@ import com.chrissloan.superscoreboard.match.MatchDetailScreen
 import com.chrissloan.superscoreboard.theme.SuperScoreBoardTheme
 import com.chrissloan.superscoreboard.useraction.NavigationAction
 
-
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +39,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SuperScoreBoard() {
-
     val navigator = rememberListDetailPaneScaffoldNavigator<Int>()
 
     BackHandler(navigator.canNavigateBack()) {

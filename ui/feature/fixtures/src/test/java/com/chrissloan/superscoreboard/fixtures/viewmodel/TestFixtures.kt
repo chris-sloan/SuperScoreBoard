@@ -22,5 +22,4 @@ internal object TestFixtures {
         status = "U",
         kickoff = Kickoff(millis = 123456789L)
     )
-
 }

@@ -143,7 +143,6 @@ fun ScoreBox(homeScore: Int, awayScore: Int, homeHtScore: Int, awayHtScore: Int)
     }
 }
 
-
 fun scorers(scope: LazyListScope, scorers: List<ScorerState>) {
     if (scorers.isEmpty()) return
     scorers.forEach { scorer ->
@@ -163,18 +162,26 @@ fun scorers(scope: LazyListScope, scorers: List<ScorerState>) {
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 8.dp),
-                    text = if (scorer.homePlayer) scorerText else AnnotatedString(
-                        ""
-                    ),
+                    text = if (scorer.homePlayer) {
+                        scorerText
+                    } else {
+                        AnnotatedString(
+                            ""
+                        )
+                    },
                     textAlign = TextAlign.End
                 )
                 Text(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 8.dp),
-                    text = if (!scorer.homePlayer) scorerText else AnnotatedString(
-                        ""
-                    ),
+                    text = if (!scorer.homePlayer) {
+                        scorerText
+                    } else {
+                        AnnotatedString(
+                            ""
+                        )
+                    },
                     textAlign = TextAlign.Start
                 )
             }
@@ -193,12 +200,12 @@ fun MatchDetails(match: MatchState.MatchDetail) {
     ) {
         Text(
             text =
-                buildAnnotatedString {
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append("Kick Off: ")
-                    }
-                    append(match.kickOffTime)
-                },
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append("Kick Off: ")
+                }
+                append(match.kickOffTime)
+            },
             style = MaterialTheme.typography.bodyMedium
         )
         Text(

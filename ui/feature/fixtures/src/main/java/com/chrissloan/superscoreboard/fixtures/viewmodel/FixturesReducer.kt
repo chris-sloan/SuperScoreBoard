@@ -12,38 +12,40 @@ class FixturesReducer : Reducer<FixturesUiState, FixturesEvent, FixturesUiState>
     operator fun invoke(currentState: FixturesUiState, event: FixturesEvent): FixturesUiState {
         return when (event) {
             FixturesEvent.Init -> currentState
-            is FixturesEvent.FixturesLoaded -> currentState.copy(fixtures = event.fixtures.fixtures.map { item ->
-                val homeName =
-                    FixturesUiState.FixtureState.TeamState(
-                        id = item.teams[0].team.id,
-                        name = item.teams[0].team.shortName
-                    )
-                val awayName =
-                    FixturesUiState.FixtureState.TeamState(
-                        id = item.teams[1].team.id,
-                        name = item.teams[1].team.shortName
-                    )
-                val status = when (item.status) {
-                    "U" -> FixturesUiState.FixtureState.MatchStatus.Upcoming(
-                        formatFutureMatch(item)
-                    )
+            is FixturesEvent.FixturesLoaded -> currentState.copy(
+                fixtures = event.fixtures.fixtures.map { item ->
+                    val homeName =
+                        FixturesUiState.FixtureState.TeamState(
+                            id = item.teams[0].team.id,
+                            name = item.teams[0].team.shortName
+                        )
+                    val awayName =
+                        FixturesUiState.FixtureState.TeamState(
+                            id = item.teams[1].team.id,
+                            name = item.teams[1].team.shortName
+                        )
+                    val status = when (item.status) {
+                        "U" -> FixturesUiState.FixtureState.MatchStatus.Upcoming(
+                            formatFutureMatch(item)
+                        )
 
-                    "C" -> FixturesUiState.FixtureState.MatchStatus.Completed(
-                        formatScore(item),
-                    )
+                        "C" -> FixturesUiState.FixtureState.MatchStatus.Completed(
+                            formatScore(item),
+                        )
 
-                    else -> FixturesUiState.FixtureState.MatchStatus.InProgress(
-                        formatScore(item),
-                        item.clock.label
+                        else -> FixturesUiState.FixtureState.MatchStatus.InProgress(
+                            formatScore(item),
+                            item.clock.label
+                        )
+                    }
+                    FixturesUiState.FixtureState(
+                        id = item.id,
+                        homeTeam = homeName,
+                        awayTeam = awayName,
+                        status = status
                     )
                 }
-                FixturesUiState.FixtureState(
-                    id = item.id,
-                    homeTeam = homeName,
-                    awayTeam = awayName,
-                    status = status
-                )
-            })
+            )
         }
     }
 

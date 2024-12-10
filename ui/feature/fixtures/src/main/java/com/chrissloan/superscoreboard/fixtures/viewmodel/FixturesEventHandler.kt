@@ -8,7 +8,7 @@ class FixturesEventHandler {
      *
      * If the event is handled in here then we return true.
      */
-    operator fun invoke(fixturesEvent: FixturesEvent) : Boolean  {
+    operator fun invoke(fixturesEvent: FixturesEvent): Boolean {
         return when (fixturesEvent) {
             is FixturesEvent.FixturesLoaded -> false
             FixturesEvent.Init -> false

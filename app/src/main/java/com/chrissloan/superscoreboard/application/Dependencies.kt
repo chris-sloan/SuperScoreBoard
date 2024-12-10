@@ -26,10 +26,12 @@ object Dependencies {
 
     val domainDependencies = module {
         singleOf(::FixtureListRepositoryImpl) { bind<FixtureListRepository>() }
-        single<MatchDetailRepository> { MatchDetailRepositoryImpl(
-            matchDetailApi = get(),
-            matchDetailPollingInterval = POLLING_INTERVAL
-        ) }
+        single<MatchDetailRepository> {
+            MatchDetailRepositoryImpl(
+                matchDetailApi = get(),
+                matchDetailPollingInterval = POLLING_INTERVAL
+            )
+        }
     }
 
     val uiDependencies = module {

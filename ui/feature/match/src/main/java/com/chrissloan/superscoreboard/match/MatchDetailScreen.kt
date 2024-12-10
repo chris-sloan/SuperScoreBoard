@@ -17,7 +17,6 @@ fun MatchDetailScreen(
     itemId: Int,
     viewModel: MatchDetailViewModel = koinViewModel { parametersOf(itemId) },
 ) {
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle(initialValue = MatchDetailUiState())
 
 /*

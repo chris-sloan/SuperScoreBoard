@@ -27,12 +27,12 @@ data class FixedAccentColors(
 fun getFixedAccentColors() = FixedAccentColors(
     upComingBackground = LightColorScheme.background,
     onUpcomingBackground = LightColorScheme.onBackground,
-    inProgressBackground = Color(0xFF51E79A),
+    inProgressBackground = Color(color = 0xFF51E79A),
     onInProgressBackground = LightColorScheme.secondary,
     completedBackground = LightColorScheme.errorContainer,
     onCompletedBackground = LightColorScheme.secondary,
 
-    )
+)
 
 val LocalFixedAccentColors = compositionLocalOf { getFixedAccentColors() }
 

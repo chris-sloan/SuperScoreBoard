@@ -7,13 +7,13 @@ sealed interface NavigationAction : UserAction {
     // other navigation actions could go here.
 }
 
-sealed interface FixturesAction: UserAction {
+sealed interface FixturesAction : UserAction {
     data class OnFixtureClick(val id: Int) : FixturesAction
     // other fixtures specific actions here
 }
 
-sealed interface MatchDetailAction: UserAction
-    // any match detail actions here
-    // club badge / name click to show club details
-    // scprer click to show player stats.
-    // etc
+sealed interface MatchDetailAction : UserAction
+// any match detail actions here
+// club badge / name click to show club details
+// scprer click to show player stats.
+// etc
