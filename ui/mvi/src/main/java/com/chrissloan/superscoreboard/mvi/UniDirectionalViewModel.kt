@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.launch
 
 abstract class UniDirectionalViewModel<Action : UserAction, Event : Any, UiState : Any> :
     ViewModel() {
@@ -19,17 +20,18 @@ abstract class UniDirectionalViewModel<Action : UserAction, Event : Any, UiState
     val uiState: Flow<UiState> = uiStateEmitter
 
     abstract fun initialState(): UiState
-    abstract fun eventFlow(): Flow<Event>
+    abstract suspend fun eventFlow(): Flow<Event>
     abstract fun eventHandled(event: Event): Boolean
     abstract fun reduce(currentState: UiState, event: Event): UiState
     abstract fun onAction(action: Action)
 
     fun onLifeCycleResumed() {
-        eventFlowJob = eventFlow()
-            .handleSideEffect()
-            .reduceState()
-            .thenEmit()
-            .launchIn(viewModelScope)
+        eventFlowJob = viewModelScope.launch {
+            eventFlow()
+                .handleSideEffect()
+                .reduceState()
+                .thenEmit()
+        }
     }
 
     private fun Flow<Event>.handleSideEffect() =
@@ -47,7 +49,7 @@ abstract class UniDirectionalViewModel<Action : UserAction, Event : Any, UiState
     private fun Flow<UiState>.thenEmit() =
         onEach {
             uiStateEmitter.value = it
-        }
+        }.launchIn(viewModelScope)
 
     fun onLifecyclePaused() {
         eventFlowJob?.cancel()

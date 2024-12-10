@@ -2,6 +2,7 @@ package com.chrissloan.superscoreboard.data.fixtures
 
 import com.chrissloan.superscoreboard.fixtures.FixtureListRepository
 import com.chrissloan.superscoreboard.model.Fixtures
+import com.chrissloan.superscoreboard.model.FixturesItem
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,7 +28,7 @@ class FixtureListRepositoryImplTest {
     @Test
     fun `getFixtures returns fixtures from api`() =
         runTest {
-            val expectedFixtures = Fixtures()
+            val expectedFixtures = Fixtures(listOf(FixturesItem(id = 12345)))
             coEvery { fixturesApi.getFixtures() } returns expectedFixtures
 
             val actualFixtures = fixtureListRepository.getFixtures().first()
@@ -45,4 +46,3 @@ class FixtureListRepositoryImplTest {
             assertNotNull(actualFixtures)
         }
 }
-

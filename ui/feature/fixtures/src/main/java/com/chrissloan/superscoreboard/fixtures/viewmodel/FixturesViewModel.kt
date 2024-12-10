@@ -16,7 +16,7 @@ class FixturesViewModel(
 
     override fun initialState() = FixturesUiState()
 
-    override fun eventFlow() =
+    override suspend fun eventFlow() =
         merge(
             flowOf(FixturesEvent.Init),
             fixtureListRepository.getFixtures()
