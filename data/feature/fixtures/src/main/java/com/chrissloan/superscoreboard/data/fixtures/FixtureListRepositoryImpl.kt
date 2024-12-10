@@ -14,7 +14,7 @@ class FixtureListRepositoryImpl(
     override suspend fun getFixtures(): Flow<Fixtures> =
         withContext(Dispatchers.IO) {
             flow {
-                emit(fixturesApi.getFixtures() ?: Fixtures())
+                emit(fixturesApi.getFixtures() ?: Fixtures.Empty)
             }
         }
 }
