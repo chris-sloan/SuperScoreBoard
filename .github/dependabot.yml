@@ -16,13 +16,13 @@ updates:
           - "minor"
           - "patch"
 
-  # ──────────── GitHub Actions (your CI) ────────────
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    rebase-strategy: "auto"
-
+#  # ──────────── GitHub Actions (your CI) ────────────
+#  - package-ecosystem: "github-actions"
+#    directory: "/"
+#    schedule:
+#      interval: "weekly"
+#    rebase-strategy: "auto"
+#
 # ──────────── optional extra ecosystems ────────────
 #  - package-ecosystem: "docker"
 #    directory: "/"
