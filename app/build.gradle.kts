@@ -85,6 +85,9 @@ dependencies {
     detektPlugins(libs.detekt.formatting)
 
     implementation(project(":data:network"))
+    implementation(project(":data:datastore:api"))
+    implementation(project(":data:datastore:impl"))
+
     implementation(project(":data:feature:fixtures"))
     implementation(project(":data:feature:match"))
 
@@ -98,6 +101,9 @@ dependencies {
     implementation(project(":ui:mvi"))
     implementation(project(":ui:feature:fixtures"))
     implementation(project(":ui:feature:match"))
+
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.core)
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

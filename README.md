@@ -70,6 +70,7 @@ For all your up to the minute scores from around the globe.
    - Spotless
    - Loading api keys via local files. 
    - Network Proxying.
+   - Group together dependencies so that we don't need to declare them independently.
 
    ### MVI / MVVM abstractions
    - ApiResponse

@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data:datastore:api"))
     implementation(project(":domain:common:model"))
     implementation(project(":domain:common:useraction"))
     implementation(project(":domain:feature:fixtures"))

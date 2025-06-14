@@ -4,6 +4,7 @@ import android.app.Application
 import com.chrissloan.superscoreboard.application.Dependencies.dataDependencies
 import com.chrissloan.superscoreboard.application.Dependencies.domainDependencies
 import com.chrissloan.superscoreboard.application.Dependencies.uiDependencies
+import com.chrissloan.superscoreboard.data.datastore.impl.persistentStorageModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -16,6 +17,7 @@ class ScoreBoardApplication : Application() {
             androidLogger()
             androidContext(this@ScoreBoardApplication)
             modules(
+                persistentStorageModule,
                 dataDependencies,
                 domainDependencies,
                 uiDependencies

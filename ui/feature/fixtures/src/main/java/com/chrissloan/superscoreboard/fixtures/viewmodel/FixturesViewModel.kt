@@ -12,6 +12,7 @@ class FixturesViewModel(
     private val fixtureListRepository: FixtureListRepository,
     private val fixturesEventHandler: FixturesEventHandler,
     private val fixturesReducer: FixturesReducer,
+//    private val userSettings: UserSettingsStore,
 ) : UniDirectionalViewModel<FixturesAction, FixturesEvent, FixturesUiState>() {
 
     override fun initialState() = FixturesUiState()
