@@ -1,0 +1,30 @@
+version: 2
+
+# ──────────── Gradle / Version-Catalog ────────────
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"                 # root of the repo
+    schedule:
+      interval: "daily"            # or "weekly", "monthly"
+    open-pull-requests-limit: 10
+    # Dependabot now handles libs.versions.toml natively
+    groups:
+      stable-libs:                 #  <<— optional: bundle related updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ──────────── GitHub Actions (your CI) ────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    rebase-strategy: "auto"
+
+# ──────────── optional extra ecosystems ────────────
+#  - package-ecosystem: "docker"
+#    directory: "/"
+#    schedule:
+#      interval: "daily"
