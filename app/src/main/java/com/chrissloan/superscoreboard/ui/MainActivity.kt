@@ -23,6 +23,7 @@ import com.chrissloan.superscoreboard.fixtures.FixturesScreen
 import com.chrissloan.superscoreboard.match.MatchDetailScreen
 import com.chrissloan.superscoreboard.theme.SuperScoreBoardTheme
 import com.chrissloan.superscoreboard.useraction.NavigationAction
+import org.koin.androidx.compose.KoinAndroidContext
 
 class MainActivity : ComponentActivity() {
 
@@ -30,8 +31,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
         setContent {
-            SuperScoreBoardTheme {
-                SuperScoreBoard()
+            KoinAndroidContext {
+                SuperScoreBoardTheme {
+                    SuperScoreBoard()
+                }
             }
         }
     }

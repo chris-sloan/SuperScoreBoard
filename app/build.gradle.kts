@@ -101,6 +101,7 @@ dependencies {
     implementation(project(":ui:mvi"))
     implementation(project(":ui:feature:fixtures"))
     implementation(project(":ui:feature:match"))
+    implementation(project(":ui:feature:countdownwidget"))
 
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.datastore.core)
@@ -114,6 +115,7 @@ dependencies {
     implementation(project.dependencies.platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
     runtimeOnly(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.foundation.layout)

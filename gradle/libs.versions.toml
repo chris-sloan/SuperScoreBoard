@@ -6,6 +6,7 @@ coilNetworkOkhttp = "3.0.4"
 datastorePreferences = "1.1.4"
 detektFormatting = "1.23.7"
 foundationLayout = "1.7.5"
+glance = "1.1.0"
 kotlin = "2.0.0"
 koin-bom = "3.5.0"
 coreKtx = "1.15.0"
@@ -39,6 +40,10 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-datastore-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastorePreferences" }
 androidx-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "foundationLayout" }
+androidx-glance = { module = "androidx.glance:glance", version.ref = "glance" }
+androidx-glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
+androidx-glance-appwidget-preview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "glance" }
+androidx-glance-testing = { module = "androidx.glance:glance-testing", version.ref = "glance" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-monitor = { module = "androidx.test:monitor", version.ref = "monitor" }
 androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
