@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "2.1.21"
+    kotlin("plugin.serialization") version "2.2.20"
     id("com.autonomousapps.dependency-analysis")
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }

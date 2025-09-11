@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
-    kotlin("plugin.serialization") version "2.1.21"
+    kotlin("plugin.serialization") version "2.2.20"
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.android.library) apply false
     id("com.autonomousapps.dependency-analysis") version "2.18.0"
