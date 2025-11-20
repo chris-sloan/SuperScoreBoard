@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    kotlin("plugin.serialization") version "2.1.21"
+    kotlin("plugin.serialization") version "2.2.21"
     alias(libs.plugins.jetbrains.kotlin.jvm)
     id("com.autonomousapps.dependency-analysis")
 }
