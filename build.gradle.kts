@@ -8,6 +8,6 @@ plugins {
     kotlin("plugin.serialization") version "2.2.21"
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.android.library) apply false
-    id("com.autonomousapps.dependency-analysis") version "2.18.0"
+    id("com.autonomousapps.dependency-analysis") version "3.5.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
